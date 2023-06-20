@@ -35,12 +35,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun App() {
-    val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
-        composable(route = Screen.MainScreen.route) {
-            HomePage(navController)
-        }
-    }
+//    val navController = rememberNavController()
+//    NavHost(navController = navController, startDestination = "main_screen") {
+//        composable(route = "main_screen") {
+//            HomePage(navController)
+//        }
+//    }
+    HomePage(null)
 }
 
 @Preview(showBackground = true)
