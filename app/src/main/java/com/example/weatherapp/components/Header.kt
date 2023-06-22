@@ -13,6 +13,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -33,9 +34,10 @@ fun Header() {
     ) {
         Text(
             text = stringResource(R.string.header),
-            fontSize = 20.sp,
+            fontSize = 32.sp,
+            color = Color.White,
             modifier = Modifier
-                .padding(top = 10.dp, start = 10.dp)
+                .padding(start = 12.dp)
         )
         TextButton(onClick = { /*TODO*/ }) {
             Image(
@@ -43,7 +45,7 @@ fun Header() {
                 contentDescription = stringResource(id = R.string.settings),
                 contentScale = ContentScale.Fit,
                 modifier = Modifier
-                    .size(50.dp)
+                    .size(32.dp)
             )
         }
     }
