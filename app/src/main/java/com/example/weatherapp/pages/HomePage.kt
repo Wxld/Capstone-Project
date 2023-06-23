@@ -5,32 +5,36 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.core.graphics.toColorInt
+import androidx.compose.ui.res.colorResource
 import com.example.weatherapp.Data
+import com.example.weatherapp.R
 import com.example.weatherapp.components.Header
 import com.example.weatherapp.components.SearchBar
 
 @Composable
 fun HomePage(
     cityInfoClickable: (Int)->Unit,
-    weatherData: SnapshotStateList<Data>
+    weatherData: SnapshotStateList<Data>,
+    deletedItem: SnapshotStateList<Data>
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .fillMaxWidth()
-            .background(Color("#2E335A".toColorInt()))
+            .background(colorResource(R.color.purple_primary))
     ) {
-        Header()
+        Header(
+            weatherData,
+            deletedItem
+        )
         SearchBar()
         Content(
             cityInfoClickable = cityInfoClickable,
-            weatherData
+            weatherData,
+            deletedItem
         )
     }
 }

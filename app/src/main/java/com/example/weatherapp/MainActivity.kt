@@ -38,22 +38,24 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun App() {
-    var weatherData = remember {
-        mutableStateListOf<Data>(
+    val weatherData = remember {
+        mutableStateListOf(
             Data(19, 24, 18, "Coimbatore, India", "Mid Rain", getWeather("Mid Rain")),
             Data(20, 21, 19, "Chennai, India", "Fast Wind", getWeather("Fast Wind")),
             Data(13, 16, 8, "Tokyo, Japan", "Showers", getWeather("Showers")),
             Data(12, 19, 10, "Chicago, USA", "Stormy", getWeather("Stormy"))
         )
     }
+    val deletedItem = remember { mutableStateListOf<Data>() }
 
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = CityRoutes.mainScreen.name) {
 
         composable(route = CityRoutes.mainScreen.name) {
             HomePage(
-                cityInfoClickable = { navController.navigate(route = "cityInfoScreen/$it ") },
-                weatherData
+                cityInfoClickable = { navController.navigate(route = "cityInfoScreen/$it") },
+                weatherData,
+                deletedItem
             )
         }
 

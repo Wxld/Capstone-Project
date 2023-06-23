@@ -1,7 +1,5 @@
-import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,32 +24,35 @@ import androidx.compose.ui.unit.sp
 import com.example.weatherapp.Data
 import com.example.weatherapp.R
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.snapshots.SnapshotStateList
 
 @Composable
 fun Content(
     cityInfoClickable: (Int)->Unit,
-    weatherData: SnapshotStateList<Data>
+    weatherData: SnapshotStateList<Data>,
+    deletedItem: SnapshotStateList<Data>
 ) {
-    LazyColumn() {
+
+    LazyColumn {
         itemsIndexed(weatherData){ index, card ->
             CityInfo(
                 cityInfoClickable = cityInfoClickable,
                 card,
                 index,
-                weatherData
+                weatherData,
+                deletedItem
             )
         }
     }
 }
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CityInfo(
     cityInfoClickable: (Int)->Unit,
     card: Data,
     index: Int,
-    weatherData: SnapshotStateList<Data>
+    weatherData: SnapshotStateList<Data>,
+    deletedItem: SnapshotStateList<Data>
 ) {
     Box(
         modifier = Modifier
@@ -62,6 +63,7 @@ fun CityInfo(
                     cityInfoClickable(index)
                 },
                 onLongClick = {
+                    deletedItem.add(weatherData[index])
                     weatherData.removeAt(index)
                 }
             )
@@ -89,7 +91,7 @@ fun CityInfo(
                     color = Color.White,
                     fontSize = 80.sp
                 )
-                Row() {
+                Row {
                     Text(
                         text = "H:"+card.highestTemperature.toString(),
                         color = Color.Magenta,
@@ -103,7 +105,7 @@ fun CityInfo(
                     )
                 }
                 Text(
-                    text = card.location.toString(),
+                    text = card.location,
                     color = Color.White,
                     modifier = Modifier
                         .padding(top = 4.dp, start = 12.dp)
@@ -128,7 +130,7 @@ fun CityInfo(
                         .weight(3f)
                 ) {
                     Text(
-                        text = card.condition.toString(),
+                        text = card.condition,
                         textAlign = TextAlign.End,
                         modifier = Modifier
                             .fillMaxWidth()
