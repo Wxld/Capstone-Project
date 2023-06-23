@@ -29,7 +29,6 @@ fun SpecificCityInfo(
     weatherData: SnapshotStateList<Data>,
     param: Int
 ) {
-    val neg = 4
     val cityInfo = weatherData[param]
     Box(
         modifier = Modifier
@@ -42,7 +41,7 @@ fun SpecificCityInfo(
             modifier = Modifier
                 .fillMaxSize()
         )
-        Column() {
+        Column {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
@@ -69,7 +68,7 @@ fun SpecificCityInfo(
                     color = Color.Gray,
                     fontSize = 20.sp
                 )
-                Row() {
+                Row {
                     Text(
                         text = "H:"+cityInfo.highestTemperature.toString(),
                         color = Color.White,
