@@ -49,25 +49,25 @@ fun App() {
     val deletedItem = remember { mutableStateListOf<Data>() }
 
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = CityRoutes.mainScreen.name) {
+    NavHost(navController = navController, startDestination = CityRoutes.MainScreen.name) {
 
-        composable(route = CityRoutes.mainScreen.name) {
+        composable(route = CityRoutes.MainScreen.name) {
             HomePage(
-                cityInfoClickable = { navController.navigate(route = "cityInfoScreen/$it") },
+                cityInfoClickable = { navController.navigate(route = "${CityRoutes.CityInfoScreen.name}/$it") },
                 weatherData,
                 deletedItem
             )
         }
 
         composable(
-            route = "cityInfoScreen/{my_param}",
+            route = "${CityRoutes.CityInfoScreen.name}/{${CityRoutes.Param.name}}",
             arguments = listOf(
-                navArgument("my_param") {
+                navArgument(CityRoutes.Param.name) {
                     type = NavType.IntType
                 }
             )
         ) {
-            val param = it.arguments?.getInt("my_param") ?: 0
+            val param = it.arguments?.getInt(CityRoutes.Param.name) ?: 0
             SpecificCityInfo(
                 param = param,
                 weatherData = weatherData

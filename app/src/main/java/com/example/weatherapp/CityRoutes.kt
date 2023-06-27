@@ -1,6 +1,7 @@
 package com.example.weatherapp
 
 enum class CityRoutes {
-    mainScreen,
-    cardInfoScreen
+    MainScreen,
+    CityInfoScreen,
+    Param
 }

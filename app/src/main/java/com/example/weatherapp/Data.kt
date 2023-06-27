@@ -1,11 +1,6 @@
 package com.example.weatherapp
 
 import androidx.annotation.DrawableRes
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 
 data class Data(
     val currentTemperature: Int,
@@ -15,10 +10,6 @@ data class Data(
     val condition: String,
     @DrawableRes val imageForCondition: Int
 )
-@Composable
-fun loadData() {
-
-}
 
 @DrawableRes fun getWeather(condition: String): Int {
     @DrawableRes val imageForCondition = when(condition) {
